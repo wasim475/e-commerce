@@ -1,7 +1,7 @@
 const express = require('express')
 require('dotenv').config()
 const app = express()
-const mongoose = require('mongoose');
+const dbConnection = require("./Config/dbConnection")
 const Task = require("./Model/TaskScema")
 const port = process.env.PORT || 1971
 
@@ -9,8 +9,8 @@ const port = process.env.PORT || 1971
 app.use(express.json())
 
 
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.uc340vx.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority&appName=Cluster0`)
-  .then(() => console.log('E-Commerce Database Connected!'));
+
+  dbConnection()
 
   app.get("/tasks", async (req,res)=>{
     const data = await Task.find()
