@@ -4,6 +4,8 @@ const app = express()
 const dbConnection = require("./Config/dbConnection")
 const Task = require("./Model/TaskScema")
 const port = process.env.PORT || 1971
+const route = require("./routes")
+
 
 // MiddleWare
 app.use(express.json())
@@ -11,6 +13,8 @@ app.use(express.json())
 
 
   dbConnection()
+
+  app.use(route)
 
   app.get("/tasks", async (req,res)=>{
     const data = await Task.find()
